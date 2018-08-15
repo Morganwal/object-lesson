@@ -3,14 +3,15 @@ form.addEventListener('submit', submitForm)
 
 function submitForm(event) {
     event.preventDefault()
-    const username = event.target.querySelector('input').value
-    getUser(username)
+    const subreddit = event.target.querySelector('input').value
+    getSubreddit(subreddit)
         .then(displayUserInfo)
 }
 
-function getUser(username) {
-    const githubAPI = 'https://api.github.com/users/'
-    return fetch(githubAPI + username)
+function getSubreddit(subreddit) {
+    const proxy = 'https://cors-anywhere.herokuapp.com/'
+    const redditAPI = `https://reddit.com/r/${subreddit}.json`
+    return fetch(proxy + redditAPI)
         .then(response => response.json())
 }
 
